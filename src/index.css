@@ -1,0 +1,256 @@
+@import 'tailwindcss';
+
+:root {
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* ATLAS360 - Global Dropdown/Select Styling */
+
+select:not([multiple]):not([size]) {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  min-height: 44px;
+  padding: 0 44px 0 16px;
+
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23526174' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+
+  border: 1px solid #B8C6D5;
+  border-radius: 6px;
+
+  color: #344563;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Hover */
+select:not([multiple]):not([size]):hover:not(:disabled) {
+  border-color: #A9BBCE;
+}
+
+/* Keyboard focus */
+select:not([multiple]):not([size]):focus-visible {
+  outline: 2px solid #00539B;
+  outline-offset: 2px;
+}
+
+/* Disabled */
+select:not([multiple]):not([size]):disabled {
+  background-color: #F1F5F9;
+  color: #94A3B8;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+/* Keep options readable */
+select option {
+  color: #344563;
+  background-color: #ffffff;
+}
+
+
+@keyframes atlas-confetti-fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -30px, 0) rotate(0deg);
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--drift), 460px, 0)
+      rotate(var(--rotation));
+  }
+}
+
+.atlas-confetti {
+  position: absolute;
+  top: 0;
+  left: var(--left);
+  width: 7px;
+  height: 12px;
+  background: var(--color);
+  border-radius: 2px;
+  opacity: 0;
+  pointer-events: none;
+  animation: atlas-confetti-fall 2.5s ease-out forwards;
+  animation-delay: var(--delay);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atlas-confetti {
+    animation: none;
+    display: none;
+  }
+}
+
+/* ATLAS360 - Global form field borders */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+textarea,
+select {
+  border: 1px solid #B8C5D3;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):hover,
+textarea:hover,
+select:hover {
+  border-color: #8FA8BF;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
+textarea:focus,
+select:focus {
+  border-color: #003B70;
+}
+
+/* Shared dialog close button */
+.atlas-dialog-close {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s, transform 0.15s;
+  z-index: 3;
+}
+
+.atlas-dialog-close:hover {
+  background: rgba(255, 255, 255, 0.38);
+  transform: rotate(90deg);
+}
+
+.atlas-dialog-close:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* For dialogs with white or light-colored headers */
+.atlas-dialog-close--light {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.atlas-dialog-close--light:hover {
+  background: rgba(255, 255, 255, 0.38);
+}
+
+
+@keyframes requestConfirmationEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes requestSuccessPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.request-confirmation-enter {
+  animation: requestConfirmationEnter 350ms
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.request-success-icon {
+  animation: requestSuccessPop 450ms
+    cubic-bezier(0.22, 1, 0.36, 1) 150ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .request-confirmation-enter,
+  .request-success-icon {
+    animation: none;
+  }
+}
+
+.atlas-modal-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 72px;
+  padding: 18px 24px;
+  background: #003b70;
+  color: #fff;
+}
+
+.atlas-modal-header h2 {
+  color: #fff;
+}
+
+.atlas-modal-header p {
+  color: #d9e8f5;
+}
